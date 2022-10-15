@@ -1,0 +1,6 @@
+export * from './tab1'
+export * from './tab2'
+export * from './tabFormFood'
+export * from './tabFormPage'
+export * from './tabFormProduct'
+export * from './tabFormSite'

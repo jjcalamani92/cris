@@ -1,26 +1,35 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+:root {
+  --swiper-theme-color: #4f46e5 !important;
+ }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  mark {
+    @apply bg-gray-200 px-1 py-0.5 rounded;
   }
-  body {
-    color: white;
-    background: black;
+  
+  /* ... */
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-500;
   }
+  .btn-default {
+    @apply inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-500;
+  }
+  .label-form {
+    @apply block text-sm font-medium text-gray-700;
+  }
+  .input-form {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm;
+  }
+  .group-button-form {
+    @apply bg-gray-100 flex flex-row-reverse p-4 gap-3;
+  }
+  .swiper {
+    @apply w-full h-[24rem] sm:h-[44rem] lg:h-[54rem] ;
+  }
+
 }
