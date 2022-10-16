@@ -7,7 +7,7 @@ export const useDeleteProduct = (parentId: string) => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ id, type}: DeleteProduct) => {
-      const { deleteProduct } = await graphQLClient.request(DELETE_PRODUCT, {
+      const { deleteProduct } = await graphQLClient.request<{deleteProduct: string}>(DELETE_PRODUCT, {
         id,
         type,
       });

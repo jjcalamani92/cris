@@ -24,6 +24,7 @@ import Link from 'next/link'
 import { useDeleteManyProductById } from '../../hooks'
 import Swal from 'sweetalert2'
 import { useToggle } from 'ahooks'
+import { SlideOversForm } from '../tailwindComponents'
 
 
 
@@ -304,6 +305,9 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
       <Modal state={state} toggle={toggle} >
         {children}
       </Modal>
+      <SlideOversForm state={state} toggle={toggle} setLeft={setLeft}>
+        {children}
+      </SlideOversForm>
     </div>
   )
 }

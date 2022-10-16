@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { ParsedUrlQuery } from "querystring";
 import { FIND_PAGES_0, graphQLClient } from "../../../../graphql";
 import { Page } from "../../../../interfaces";
 

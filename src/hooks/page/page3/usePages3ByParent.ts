@@ -7,12 +7,12 @@ import { getQuery } from "../../../../utils";
 
 
 export const findPages3ByParent = async (parentId:string) => {
-  const { findPages3ByParent } = await graphQLClient.request(FIND_PAGE_3_BY_PARENT, {parentId: parentId});
+  const { findPages3ByParent } = await graphQLClient.request<{ findPages3ByParent: Page[] }>(FIND_PAGE_3_BY_PARENT, {parentId: parentId});
   return findPages3ByParent;
 };
 
 export function usePages3ByParent(asPath: string) {
   const query = getQuery(asPath)
   const parentId = query[3]?.split('=')[1]!
-  return useQuery<[Page]>(["find-pages3-by-parent", parentId], () => findPages3ByParent(parentId));
+  return useQuery(["find-pages3-by-parent", parentId], () => findPages3ByParent(parentId));
 }

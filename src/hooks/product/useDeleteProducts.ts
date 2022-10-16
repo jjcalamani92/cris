@@ -9,7 +9,7 @@ export const useDeleteProducts = (parentId:string) => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ ids, type}: DeleteManyProductById) => {
-      const { deleteProductsById } = await graphQLClient.request(DELETE_MANY_PRODUCT_BY_ID, {
+      const { deleteProductsById } = await graphQLClient.request<{deleteProductsById: string[]}>(DELETE_MANY_PRODUCT_BY_ID, {
         ids,
         type,
       });

@@ -5,7 +5,7 @@ import { getQuery } from "../../../utils";
 
 
 export const findProduct = async (id:string, type:string) => {
-  const { findProduct } = await graphQLClient.request(
+  const { findProduct } = await graphQLClient.request<{findProduct: Product}>(
     FIND_PRODUCT,
     { id: id, type: type }
   );
@@ -17,5 +17,5 @@ export function useProduct(asPath: string) {
   const id = query[4]?.split('=')[1]!
   const type = query[4]?.split('=')[0]!
 
-  return useQuery<Product>(["find-product", id, type],  () => findProduct(id, type));
+  return useQuery(["find-product", id, type],  () => findProduct(id, type));
 }

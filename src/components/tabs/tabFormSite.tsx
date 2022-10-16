@@ -13,9 +13,9 @@ interface TabFormSite {
 export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
   // console.log(site);
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-lg h-full ">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-xl bg-white p-3">
+        <Tab.List className="flex space-x-1 rounded-xl bg-white py-3">
           <Tab
             className={({ selected }) =>
               classNames(
@@ -62,10 +62,10 @@ export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
             More
           </Tab>
         </Tab.List>
-        <Tab.Panels className="mt-2">
+        <Tab.Panels className={'h-auto content-between'}>
           <Tab.Panel
             className={classNames(
-              'rounded-xl bg-white'
+              'rounded-xl bg-white '
             )}
           >
             <SiteForm toggle={toggle} setLeft={setLeft}  site={site} />

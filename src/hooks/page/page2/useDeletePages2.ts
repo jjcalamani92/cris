@@ -8,7 +8,7 @@ export const useDeletePages2 = (parentId: string) => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ ids}: DeletePages) => {
-      const { deletePages2 } = await graphQLClient.request(DELETE_PAGES_2, {
+      const { deletePages2 } = await graphQLClient.request<{ deletePages2: string[] }>(DELETE_PAGES_2, {
         ids
       });
       return deletePages2;

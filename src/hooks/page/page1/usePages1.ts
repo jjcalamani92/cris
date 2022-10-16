@@ -6,10 +6,10 @@ import { Page } from "../../../../interfaces";
 
 
 export const findPages1 = async () => {
-  const { findPages1 } = await graphQLClient.request(FIND_PAGES_1);
+  const { findPages1 } = await graphQLClient.request< { findPages1: Page[] } >(FIND_PAGES_1);
   return findPages1;
 };
 
 export function usePages1() {
-  return useQuery<[Page]>(["find-pages1"], () => findPages1());
+  return useQuery(["find-pages1"], () => findPages1());
 }

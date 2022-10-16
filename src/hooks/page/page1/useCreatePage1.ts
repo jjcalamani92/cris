@@ -6,7 +6,7 @@ export const useCreatePage1 = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (input: CreatePage) => {
-      const { createPage1 } = await graphQLClient.request(CREATE_PAGE_1, {
+      const { createPage1 } = await graphQLClient.request<{ createPage1: Page }>(CREATE_PAGE_1, {
         input,
       });
       return createPage1;

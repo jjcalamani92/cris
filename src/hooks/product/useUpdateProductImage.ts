@@ -7,7 +7,7 @@ export const useUpdateProductImage = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({id, input, type, uid}:UpdateProductImage) => {
-      const { updateProductImage } = await graphQLClient.request(UPDATE_PRODUCT_IMAGE, {
+      const { updateProductImage } = await graphQLClient.request<{updateProductImage: Product}>(UPDATE_PRODUCT_IMAGE, {
         id,
         input,
         type,
@@ -19,7 +19,7 @@ export const useUpdateProductImage = () => {
       onSuccess: async (updateProductImage, {id, input, type}) => {
         // const siteId = id
         // queryClient.invalidateQueries([`find-site`]);
-        queryClient.setQueryData<Product>(['find-product', id, type], updateProductImage);
+        queryClient.setQueryData(['find-product', id, type], updateProductImage);
       },
       onError: (error) => {
         console.log(error);

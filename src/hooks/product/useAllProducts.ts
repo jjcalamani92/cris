@@ -8,10 +8,10 @@ import { Site } from "../../../interfaces/site.interface";
 
 
 export const findAllProducts = async () => {
-  const { findAllProducts } = await graphQLClient.request(FIND_ALL_PRODUCTS);
+  const { findAllProducts } = await graphQLClient.request<{ findAllProducts:Product[] }>(FIND_ALL_PRODUCTS);
   return findAllProducts;
 };
 
 export function useAllProducts() {
-  return useQuery<[Product]>(["find-all-products"], () => findAllProducts());
+  return useQuery(["find-all-products"], () => findAllProducts());
 }

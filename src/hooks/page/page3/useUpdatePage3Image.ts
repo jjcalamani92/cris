@@ -7,7 +7,7 @@ export const useUpdatePage3Image = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({id, input, uid}:UpdateImagePage) => {
-      const { updateImagePage3 } = await graphQLClient.request(UPDATE_IMAGE_PAGE_3, {
+      const { updateImagePage3 } = await graphQLClient.request<{ updateImagePage3: Page }>(UPDATE_IMAGE_PAGE_3, {
         id,
         input,
         uid,
@@ -17,7 +17,7 @@ export const useUpdatePage3Image = () => {
     {
       onSuccess: async (updateImagePage3, {id, input}) => {
         const pageId = id
-        queryClient.setQueryData<Page>(['find-page3', pageId], updateImagePage3);
+        queryClient.setQueryData(['find-page3', pageId], updateImagePage3);
       },
       onError: (error) => {
         console.log(error);

@@ -7,7 +7,7 @@ export const useCreateProduct = (parentId: string) => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ input, type}: CreateProduct) => {
-      const { createProduct } = await graphQLClient.request(CREATE_PRODUCT, {
+      const { createProduct } = await graphQLClient.request<{createProduct: Product}>(CREATE_PRODUCT, {
         input,
         type,
       });

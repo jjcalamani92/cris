@@ -65,10 +65,10 @@ export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
 
   const cancelButtonRef = useRef(null)
   return (
-    <div className="">
+    <div className=" border-2 h-full">
       <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST">
-        <div className="overflow-hidden sm:rounded-md">
-          <div className="px-5">
+        <div className="overflow-hidden sm:rounded-md ">
+          <div className="p-2 h-full">
             {/* <div className="text-center sm:mt-0 sm:text-left">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
                 {
@@ -174,10 +174,11 @@ export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
 
 
             </div>
+            
           </div>
 
         </div>
-        <div className="group-button-form">
+        <div className="group-button-form items-end">
           <button
             type="submit"
             className="btn-primary "

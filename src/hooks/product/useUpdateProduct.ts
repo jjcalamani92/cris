@@ -7,7 +7,7 @@ export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({id, input, type}:UpdateProduct) => {
-      const { updateProduct } = await graphQLClient.request(UPDATE_PRODUCT, {
+      const { updateProduct } = await graphQLClient.request<{updateProduct: Product}>(UPDATE_PRODUCT, {
         id,
         input,
         type
@@ -18,7 +18,7 @@ export const useUpdateProduct = () => {
       onSuccess: async (updateProduct, {id, input, type}) => {
         // const siteId = id
         // queryClient.invalidateQueries([`find-site`]);
-        queryClient.setQueryData<Product>(['find-product', id, type], updateProduct);
+        queryClient.setQueryData(['find-product', id, type], updateProduct);
       },
       onError: (error) => {
         console.log(error);
