@@ -28,9 +28,9 @@ interface ImageFormFood {
   image?: ImageProduct[]
 }
 export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image }) => {
-  console.log('https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/2ffbfb8a-7fcc-48cd-acf9-66a50ce25179/dri-fit-womens-tee-SK5XzW.png'.length)
-  console.log('http://www.polloscopacabana.com/images/products/i_ref-combos-web-pacenisimo.jpg'.length);
-  console.log('https://d33wubrfki0l68.cloudfront.net/e45cab36a97b0b21f45d631815cc41cb84c92f6e/66855/rocketech-logo.eac89356.svg'.length);
+  // console.log('https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/2ffbfb8a-7fcc-48cd-acf9-66a50ce25179/dri-fit-womens-tee-SK5XzW.png'.length)
+  // console.log('http://www.polloscopacabana.com/images/products/i_ref-combos-web-pacenisimo.jpg'.length);
+  // console.log('https://d33wubrfki0l68.cloudfront.net/e45cab36a97b0b21f45d631815cc41cb84c92f6e/66855/rocketech-logo.eac89356.svg'.length);
   
   
   const { data: session } = useSession()

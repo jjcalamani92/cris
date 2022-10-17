@@ -1,4 +1,5 @@
 
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { createRef, FC, Fragment, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler, PathString } from 'react-hook-form';
@@ -36,16 +37,16 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   const { data: site } = useSite(asPath)
-  console.log(site);
-  
+  // console.log(site);
+
   const { mutate: createPage0 } = useCreatePage0()
-  const { mutate: updatePage0 } = useUpdatePage0()
-  const { mutate: createPage1 } = useCreatePage1()
+  const { mutate: updatePage0, error: errorUpdate0 } = useUpdatePage0()
+  const { mutate: createPage1, error: errorUpdate1 } = useCreatePage1()
   const { mutate: updatePage1 } = useUpdatePage1()
   const { mutate: createPage2 } = useCreatePage2()
   const { mutate: updatePage2 } = useUpdatePage2()
   const [radio, setRadio] = useState('')
-// console.log(type);
+  // console.log(type);
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormValues>({ mode: "onChange", defaultValues: page ? { title: page?.data.seo.title, description: page?.data.seo.description, type: page?.data.type } : { title: "", description: "page description", type: '' } });
 
@@ -53,39 +54,33 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
     const form = { ...data, title: data.title.trim(), description: data.description.trim(), site: query[2], parent: uid! }
     const formUpdate = { ...data, title: data.title.trim(), description: data.description.trim(), site: page?.site!, parent: page?.parent! }
 
-
     if (page) {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Updated Page',
-        showConfirmButton: false,
-        timer: 1000
-      })
-      if (query.length === 4 && query.at(-1)?.split('=')[0] === 'page1') {
+      if (query.length > 3 && query[3] === 'page1') {
         updatePage1({ id: page._id, input: formUpdate })
-      } else if (query.length === 4 && query.at(-1)?.split('=')[0] === 'page0') {
+      } else if (query.length > 3 && query[3] === 'page0') {
         updatePage0({ id: page._id, input: formUpdate })
       }
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Created Page',
-        showConfirmButton: false,
-        timer: 1000
-      })
-      if (query.length === 4 && query.at(-1)?.split('=')[0] === 'page1') {
+      if (query.length > 3 && query[3] === 'page1') {
         createPage2(form)
 
-      } else if (query.length === 4 && query.at(-1)?.split('=')[0] === 'page0') {
+      } else if (query.length > 3 && query[3] === 'page0') {
         createPage1(form)
 
       } else if (query.length === 3) {
         createPage0(form)
       }
+      // Swal.fire({
+      //   position: 'center',
+      //   icon: 'success',
+      //   title: 'Created Page',
+      //   showConfirmButton: false,
+      //   timer: 1000
+      // })
     }
     toggle()
+
+
   }
   const cancelButtonRef = useRef(null)
   const ref = createRef();
@@ -96,7 +91,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
       <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST">
         <div className="overflow-hidden shadow sm:rounded-md">
           <div className="bg-white px-5">
-            
+
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6">
                 <label
@@ -167,7 +162,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
 
                           )
                         }
-                        
+
                         {
                           site?.data.dataBase.map(data => data.value).includes(page?.data.type!) &&
                           (site?.data.dataBase.map(data => (
@@ -233,7 +228,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
 
                           </>
                         }
-                        
+
                         {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
                       </>
                       :
@@ -383,7 +378,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
                           </>
                         }
                         {
-                          type === 'category-food' && 
+                          type === 'category-food' &&
                           <>
                             {typePageFoodCategory.map(data => (
                               <div className="flex items-center my-2" key={data.label}>
@@ -444,7 +439,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
           <button
             type="submit"
             className="btn-primary "
-            >
+          >
             {page ? 'Update' : 'Created'}
           </button>
           <button

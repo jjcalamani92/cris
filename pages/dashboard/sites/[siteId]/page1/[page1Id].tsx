@@ -1,22 +1,24 @@
 import React, { Fragment, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor, useAllFoods, findAllFoodsByParent, findAllFoods, findFood, useSite, usePages0ByParent } from '../../../../../src/hooks'
+import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor, useAllFoods, findAllFoodsByParent, findAllFoods, findFood, useSite, usePages0ByParent, usePages2ByParent, usePage1 } from '../../../../../src/hooks'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { LayoutDashboard } from '../../../../../src/layouts'
-import { HeadingDashboard, Pages0 } from '../../../../../src/components'
+import { HeadingDashboard, Pages0, Pages2 } from '../../../../../src/components'
 
 function Page1() {
   const { asPath } = useRouter()
-  // const { data: site } = useSite(asPath);
-  // const { data: pages0 } = usePages0ByParent(asPath)
-  // const list = useMemo(() => pages0,
-  //   [pages0])
+  const { data: page1 } = usePage1(asPath)
+  const { data: pages2 } = usePages2ByParent(asPath)
+  const list = useMemo(() => pages2,
+    [pages2])
   return (
     <Fragment>
-      <h1>Holitas</h1>
+      <HeadingDashboard title={page1?.data.seo.title!} page={page1}/>
+      <Pages2 pages2={list!}/>
+      
       {/* <HeadingDashboard title={site?.data.name!} site={site}/>
       <Pages0 pages0={list!}/> */}
     </Fragment>
@@ -24,9 +26,10 @@ function Page1() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
+  const pages1 = await findPages1()
+  
   return {
-    paths: [{ params: { siteId:"6324d2d5132d462bc1c57b55", page1Id: "632ca46a82a7abdb4cafd1c8" } }],
+    paths: pages1.map(data => ({ params: { siteId: data.site, page1Id: data._id } })),
     fallback: 'blocking'
   };
 }
@@ -34,10 +37,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
   const queryClient = new QueryClient()
-  const siteId = context?.params?.siteId as string
-  const parentId = context?.params?.siteId as string
-  // await queryClient.prefetchQuery(["find-site", siteId], async () => await findSite(siteId))
-  // await queryClient.prefetchQuery(["find-pages0-by-parent", parentId], async () => await findPages0ByParent(parentId))
+  const pageId = context?.params?.page1Id as string
+  const parentId = context?.params?.page1Id as string
+  console.log(context?.params);
+  await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
+  await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

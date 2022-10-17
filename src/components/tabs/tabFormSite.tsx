@@ -13,8 +13,8 @@ interface TabFormSite {
 export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
   // console.log(site);
   return (
-    <div className="w-full max-w-lg h-full ">
-      <Tab.Group>
+    <div className="w-full max-w-lg">
+      <Tab.Group >
         <Tab.List className="flex space-x-1 rounded-xl bg-white py-3">
           <Tab
             className={({ selected }) =>
@@ -22,7 +22,7 @@ export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
-                  ? 'bg-white shadow'
+                  ? 'bg-white'
                   : 'text-indigo-900 hover:bg-white/[0.12] '
               )
             }
@@ -38,7 +38,7 @@ export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
 
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
-                  ? 'bg-white shadow'
+                  ? 'bg-white '
                   : 'text-blue-900 hover:bg-white/[0.12] '
               )
             }
@@ -54,7 +54,7 @@ export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
 
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
-                  ? 'bg-white shadow'
+                  ? 'bg-white '
                   : 'text-blue-900 hover:bg-white/[0.12] '
               )
             }
@@ -62,7 +62,8 @@ export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
             More
           </Tab>
         </Tab.List>
-        <Tab.Panels className={'h-auto content-between'}>
+
+        <Tab.Panels className={'h-auto'}>
           <Tab.Panel
             className={classNames(
               'rounded-xl bg-white '

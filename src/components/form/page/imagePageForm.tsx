@@ -87,7 +87,7 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
     } catch (error) {
       const err = error as AxiosError
       const { message } = err.response?.data as {message: string}
-      console.log(message)
+      // console.log(message)
       Swal.fire({
       
         icon: 'error',

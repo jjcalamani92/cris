@@ -111,7 +111,7 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
     } catch (error) {
       const err = error as AxiosError
       const { message } = err.response?.data as {message: string}
-      console.log(message)
+      // console.log(message)
       // console.log(error.response.data.message);
       
     }

@@ -26,7 +26,7 @@
     @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm;
   }
   .group-button-form {
-    @apply bg-gray-100 flex flex-row-reverse p-4 gap-3;
+    @apply bg-gray-100 flex flex-row-reverse p-4 gap-3 items-end;
   }
   .swiper {
     @apply w-full h-[24rem] sm:h-[44rem] lg:h-[54rem] ;

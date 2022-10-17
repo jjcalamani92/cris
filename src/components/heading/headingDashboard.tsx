@@ -45,7 +45,6 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   // console.log(page?.data.type);
   const [state, { toggle, setLeft, setRight }] = useToggle();
 
-  const [openMCD, setOpenMCD] = useState(false)
   const [children, setChildren] = useState<React.ReactNode>()
   const { mutate: deleteProducts } = useDeleteManyProductById( {first: 10}, query[2],query[4])
 
@@ -302,9 +301,9 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
         </Menu>
         }
       </div>
-      <Modal state={state} toggle={toggle} >
+      {/* <Modal state={state} toggle={toggle} >
         {children}
-      </Modal>
+      </Modal> */}
       <SlideOversForm state={state} toggle={toggle} setLeft={setLeft}>
         {children}
       </SlideOversForm>

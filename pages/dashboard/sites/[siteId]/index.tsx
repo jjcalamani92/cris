@@ -14,6 +14,9 @@ function Site() {
   const { asPath } = useRouter()
   const { data: site } = useSite(asPath);
   const { data: pages0 } = usePages0ByParent(asPath)
+  console.log(pages0);
+  console.log(asPath);
+  
   const list = useMemo(() => pages0,
     [pages0])
   return (

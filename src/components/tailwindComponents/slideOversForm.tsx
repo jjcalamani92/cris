@@ -2,12 +2,7 @@
 import { FC, Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { useToggle } from 'ahooks'
-import ReactMarkdown from 'react-markdown'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import atomOneDark from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
+
 interface SlideOversForm {
   state: boolean
   toggle: () => void
@@ -66,17 +61,21 @@ export const SlideOversForm: FC<SlideOversForm> = ({ state, toggle, setLeft, chi
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                    {/* <div className="px-4 sm:px-6">
                       <Dialog.Title className="text-lg font-medium text-gray-900">Example Prescription</Dialog.Title>
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                    </div> */}
+
+                    <div className="relative px-4 sm:px-6">
                       {/* Replace with your content */}
-                      <div className="absolute inset-0 px-4 sm:px-6">
-                        <div className="h-full flex" aria-hidden="true" >
+                      <div className="absolute inset-0">
+                        <div className="" aria-hidden="true" >
                           {children}
                         </div>
+
+
                       </div>
+                        
                       {/* /End replace */}
                     </div>
                   </div>
