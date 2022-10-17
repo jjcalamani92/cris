@@ -96,6 +96,8 @@ export interface UpdateProduct {
     discountPrice: number
     change: string
     uid: string
+    site: string
+    parent: string
   }
   type: string
 }

@@ -11,7 +11,7 @@ import { ProductWear } from '../../../../../../src/components'
 function ClothingId() {
   const { asPath } = useRouter()
   const { data: product } = useProduct(asPath)
-  console.log(product);
+  // console.log(product);
   
   return (
     <Fragment>
@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
   const queryClient = new QueryClient()
-  console.log(context?.params);
+  // console.log(context?.params);
   
   const id = context?.params?.productId as string
   const type = context?.params?.type as string

@@ -27,8 +27,9 @@ interface ProductForm {
 }
 export const ProductForm: FC<ProductForm> = ({ toggle, setLeft, uid, type, product }) => {
   const { data: session } = useSession()
-  // console.log(product);
-
+  // console.log('product', product);
+  // console.log(uid);
+  
 
   const { asPath } = useRouter()
   const query = getQuery(asPath)
@@ -39,26 +40,10 @@ export const ProductForm: FC<ProductForm> = ({ toggle, setLeft, uid, type, produ
   const { mutate: updateProduct } = useUpdateProduct()
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), inStock: Number(data.inStock), uid: session?.user.sid!, change: "create product" }
-    const form = { ...updateForm, site: query[2], parent: uid! }
     if (product) {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Updated Product',
-        showConfirmButton: false,
-        timer: 1000
-      })
-      updateProduct({ id: product._id, input: updateForm, type: product.type })
+      updateProduct({ id: product._id, input: { ...updateForm, site:  query[2], parent: product.parent! }, type: product.type })
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Created Product',
-        showConfirmButton: false,
-        timer: 500
-      })
-      createProduct({ input: form, type: type! })
-
+      createProduct({ input: { ...updateForm, site: query[2], parent: uid! }, type: type! })
     }
     toggle()
   };

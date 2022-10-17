@@ -12,8 +12,8 @@ function Page0() {
   const { asPath } = useRouter()
   const { data: page0 } = usePage0(asPath)
   const { data: pages1 } = usePages1ByParent(asPath)
-console.log(asPath);
-console.log(pages1);
+// console.log(asPath);
+// console.log(pages1);
 
   
   const list = useMemo(() => pages1,

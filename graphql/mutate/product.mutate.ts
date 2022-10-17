@@ -33,6 +33,7 @@ export const UPDATE_PRODUCT = gql`
     updateProduct(id: $id, input: $input, type: $type) {
       _id
       type
+      parent
       data {
         name
         slug

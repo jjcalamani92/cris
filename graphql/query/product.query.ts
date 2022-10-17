@@ -117,6 +117,7 @@ export const FIND_PRODUCT = gql`
   query FindProduct($id: ID!, $type: String!) {
     findProduct(id: $id, type: $type) {
       _id
+      parent
       type
       data {
         name
