@@ -14,8 +14,8 @@ export const findProduct = async (id:string, type:string) => {
 
 export function useProduct(asPath: string) {
   const query = getQuery(asPath)
-  const id = query[4]?.split('=')[1]!
-  const type = query[4]?.split('=')[0]!
+  const id = query[5]
+  const type = query[4]
 
   return useQuery(["find-product", id, type],  () => findProduct(id, type));
 }

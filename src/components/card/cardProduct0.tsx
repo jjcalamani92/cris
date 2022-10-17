@@ -37,7 +37,7 @@ export const CardProduct0: FC<CardProduct0> = ({ product, checked, partiallySele
           src={product?.data.seo.image.src!}
           alt={product?.data.seo.image.alt!}
         />
-        <Link href={`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`}>
+        <Link href={`/dashboard/sites/${product?.site}/product/${product?.type}/${product?._id}`}>
         <a className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
           <h2 className=" text-sm tracking-wide truncate">{product?.data.seo.title}</h2>
         </a>
