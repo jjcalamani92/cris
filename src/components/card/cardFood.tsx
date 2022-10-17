@@ -35,7 +35,7 @@ export const CardFood: FC<CardFood> = ({ food, checked, partiallySelected,  togg
         <Image img={food?.data.seo.image!} className="h-[12rem] w-full object-cover"/>
 
         
-        <Link href={`/dashboard/sites/${food?.site}/meal/${food?.type}=${food?._id}`}>
+        <Link href={`/dashboard/sites/${food?.site}/meal/${food?.type}/${food?._id}`}>
         <a className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
           <h2 className=" text-sm tracking-wide truncate">{food?.data.seo.title}</h2>
         </a>

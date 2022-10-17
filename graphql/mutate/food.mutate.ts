@@ -32,6 +32,7 @@ export const UPDATE_FOOD = gql`
     updateFood(id: $id, input: $input, type: $type) {
       _id
       type
+      parent
       data {
         name
         slug
@@ -83,6 +84,7 @@ export const UPDATE_FOOD_IMAGE = gql`
     updateFoodImage(id: $id, input: $input, type: $type, uid: $uid) {
       _id
       type
+      parent
       data {
         name
         slug

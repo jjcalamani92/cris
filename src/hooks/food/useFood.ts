@@ -5,7 +5,7 @@ import { getQuery } from "../../../utils";
 
 
 export const findFood = async (id:string, type:string) => {
-  const { findFood } = await graphQLClient.request(
+  const { findFood } = await graphQLClient.request<{ findFood: Food } >(
     FIND_FOOD,
     { id: id, type: type }
   );
@@ -14,8 +14,7 @@ export const findFood = async (id:string, type:string) => {
 
 export function useFood(asPath: string) {
   const query = getQuery(asPath)
-  const id = query[4]?.split('=')[1]!
-  const type = query[4]?.split('=')[0]!
-
-  return useQuery<Food>(["find-food", id, type],  () => findFood(id, type));
+  const id = query[5]
+  const type = query[4]
+  return useQuery(["find-food", id, type],  () => findFood(id, type));
 }

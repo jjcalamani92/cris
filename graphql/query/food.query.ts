@@ -112,6 +112,7 @@ export const FIND_FOOD = gql`
     findFood(id: $id, type: $type) {
       _id
       type
+      parent
       data {
         name
         slug

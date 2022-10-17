@@ -45,8 +45,10 @@ export interface UpdateFood {
     promotion: string
     price: number
     discountPrice: number
-    change: string
     uid: string
+    change: string
+    site: string
+    parent: string
   }
   type: string
 }

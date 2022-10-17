@@ -30,6 +30,7 @@ export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, meal }) => 
 
   const { asPath } = useRouter()
   const query = getQuery(asPath)
+  // console.log(uid);
   
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: meal ? { name: meal.data.name, promotion: meal.data.promotion.href, description: meal.data.description, price: meal.data.price, discountPrice: meal.data.discountPrice } : { name: "", promotion: 'none', description: 'meal description', price: 0, discountPrice: 0} });
 
@@ -38,26 +39,10 @@ export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, meal }) => 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), uid: session?.user.sid!, change: "create meal" }
     const form = { ...updateForm, site: query[2], parent: uid! }
-    // console.log(form);
-    
     if (meal) {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Updated Food',
-        showConfirmButton: false,
-        timer: 1000
-      })
-      updateFood({ id: meal._id, input: updateForm, type: meal.type })
+      updateFood({ id: meal._id, input: { ...updateForm, site: query[2], parent: meal.parent }, type: meal.type })
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Created Food',
-        showConfirmButton: false,
-        timer: 500
-      })
-      createFood({ input: form, type: type! })
+      createFood({ input: { ...updateForm, site: query[2], parent: uid! }, type: type! })
     }
     toggle()
   };

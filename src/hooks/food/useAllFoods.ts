@@ -8,10 +8,10 @@ import { Site } from "../../../interfaces/site.interface";
 
 
 export const findAllFoods = async () => {
-  const { findAllFoods } = await graphQLClient.request(FIND_ALL_FOODS);
+  const { findAllFoods } = await graphQLClient.request<{ findAllFoods: Food[] }>(FIND_ALL_FOODS);
   return findAllFoods;
 };
 
 export function useAllFoods() {
-  return useQuery<[Food]>(["find-all-foods"], () => findAllFoods());
+  return useQuery(["find-all-foods"], () => findAllFoods());
 }

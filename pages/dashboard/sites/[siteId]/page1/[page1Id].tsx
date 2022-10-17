@@ -1,26 +1,33 @@
 import React, { Fragment, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor, useAllFoods, findAllFoodsByParent, findAllFoods, findFood, useSite, usePages0ByParent, usePages2ByParent, usePage1 } from '../../../../../src/hooks'
+import { findPage1, findPages1, findPages2ByParent, findAllFoodsByParent, usePages2ByParent, usePage1, useAllFoodsByParent } from '../../../../../src/hooks'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { LayoutDashboard } from '../../../../../src/layouts'
-import { HeadingDashboard, Pages0, Pages2 } from '../../../../../src/components'
+import { Foods, HeadingDashboard, Pages2 } from '../../../../../src/components'
+import { typePageFoodCategory } from '../../../../../utils'
 
 function Page1() {
   const { asPath } = useRouter()
   const { data: page1 } = usePage1(asPath)
   const { data: pages2 } = usePages2ByParent(asPath)
+  const { data: foods } = useAllFoodsByParent(asPath)
+  console.log(foods);
+  
   const list = useMemo(() => pages2,
     [pages2])
+    const listFoods = useMemo(() => foods,
+    [foods])
   return (
     <Fragment>
       <HeadingDashboard title={page1?.data.seo.title!} page={page1}/>
       <Pages2 pages2={list!}/>
-      
-      {/* <HeadingDashboard title={site?.data.name!} site={site}/>
-      <Pages0 pages0={list!}/> */}
+      {
+        typePageFoodCategory.map(data => data.value).includes(page1?.data.type!) &&
+        <Foods foods={listFoods!} type={page1?.data.type!} />
+      }
     </Fragment>
   )
 }
@@ -42,6 +49,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   console.log(context?.params);
   await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
   await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
+  await queryClient.prefetchQuery(["find-all-foods-by-parent", parentId], async () => await findAllFoodsByParent(parentId))
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
