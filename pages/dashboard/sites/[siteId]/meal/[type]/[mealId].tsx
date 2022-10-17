@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
   const queryClient = new QueryClient()
-  console.log(context?.params);
+  // console.log(context?.params);
   
   const id = context?.params?.mealId as string
   const type = context?.params?.type as string

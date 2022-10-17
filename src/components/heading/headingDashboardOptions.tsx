@@ -19,10 +19,10 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
 
   const { mutate: deleteSites } = useDeleteManySitesById()
   const { mutate: deletePages0 } = useDeletePages0(query[2])
-  const { mutate: deletePages1 } = useDeletePages1(query[3]?.split('=')[1])
+  const { mutate: deletePages1 } = useDeletePages1(query[4])
   const { mutate: deletePages2 } = useDeletePages2(query[3]?.split('=')[1])
   const { mutate: deletePages3 } = useDeletePages3(query[3]?.split('=')[1])
-  const { mutate: deleteProducts } = useDeleteProducts(query[3]?.split('=')[1])
+  const { mutate: deleteProducts } = useDeleteProducts(query[4])
   const deleteHandle = () => {
     // console.log('deleteHandle', select);
     Swal.fire({
@@ -35,26 +35,20 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
       confirmButtonText: 'Yes, delete it!'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-          timer: 1000,
-          showConfirmButton: false,
-        })
+        
         if (query.length === 2) { deleteSites({ ids: selected }) }
 
         if (query.length === 3) { deletePages0({ ids: selected }) }
 
-        if (query.length === 4) {
-          if (query[3].split('=')[0] === 'page0') { deletePages1({ ids: selected })} 
-          if (query[3].split('=')[0] === 'page1') {
+        if (query.length === 5) {
+          if (query[3] === 'page0') { deletePages1({ ids: selected })} 
+          if (query[3] === 'page1') {
             deletePages2({ ids: selected })
           }
-          if (query[3].split('=')[0] === 'page2' && typePageEcommerceCategory.map(data => data.value).includes(type!)) {
+          if (query[3] === 'page2' && typePageEcommerceCategory.map(data => data.value).includes(type!)) {
             deleteProducts({ ids: selected, type: type! })
           }
-          if (query[3].split('=')[0] === 'page2') {
+          if (query[3]=== 'page2') {
             deletePages3({ ids: selected })
           }
         }

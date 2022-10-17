@@ -14,7 +14,7 @@ function Page1() {
   const { data: page1 } = usePage1(asPath)
   const { data: pages2 } = usePages2ByParent(asPath)
   const { data: foods } = useAllFoodsByParent(asPath)
-  console.log(foods);
+  // console.log(foods);
   
   const list = useMemo(() => pages2,
     [pages2])
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient()
   const pageId = context?.params?.page1Id as string
   const parentId = context?.params?.page1Id as string
-  console.log(context?.params);
+  // console.log(context?.params);
   await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
   await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
   await queryClient.prefetchQuery(["find-all-foods-by-parent", parentId], async () => await findAllFoodsByParent(parentId))

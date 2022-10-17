@@ -1,8 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CREATE_PRODUCT,  DELETE_MANY_PRODUCT_BY_ID,  DELETE_PRODUCT,  graphQLClient } from "../../../graphql";
 import { ConnectionArgs, CreateProduct, CreateSite, DeleteManyProductById, DeleteProduct, Product, Site, UpdateSite } from "../../../interfaces";
-import { findAllProductsByParent } from "./useAllProductsByParent";
-import { findProductsWithCursor } from "./useAllProductsWithCursor";
 
 
 export const useDeleteProducts = (parentId:string) => {
