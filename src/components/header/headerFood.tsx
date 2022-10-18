@@ -231,9 +231,8 @@ interface HeaderFood {
 
 export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
   const {asPath} = useRouter()
-  const [item, setItem] = useState(navigation.categories[0].categories[0].items)
   // console.log(item);
-
+  
   const [state, { toggle, setLeft, setRight }] = useToggle();
   const selectHandle = (id: string) => {
     console.log('Click', id)
@@ -242,8 +241,9 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
   // console.log(site);
 
   const list = useMemo(() => site,
-    [site])
+  [site])
   const categories = getPathByLayout(list!)
+  const [item, setItem] = useState(categories[1].children[0].items)
 
   console.log(getPathByLayout(site!));
   
