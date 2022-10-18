@@ -2,7 +2,7 @@ import { useToggle } from "ahooks";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, Fragment } from "react";
-import { HeaderEcommerce0, HeaderEducation0, HeaderFood0, ShoppingCarts } from "../components";
+import { HeaderEcommerce0, HeaderEducation0, HeaderFood, HeaderFood0, ShoppingCarts } from "../components";
 import { Main, MainEcommerce } from "../components/main";
 import { useSite } from "../hooks";
 
@@ -58,7 +58,8 @@ export const LayoutPagesProyects: FC<LayoutPagesProyects> = ({
 			{
 				site?.data.type === 'food' &&
 				<Fragment>
-					<HeaderFood0 toggleShoppingCarts={toggle} />
+					<HeaderFood toggleShoppingCarts={toggle} />
+					{/* <HeaderFood0 toggleShoppingCarts={toggle} /> */}
 					<ShoppingCarts state={state} toggle={toggle} setLeft={setLeft} />
 					<MainEcommerce>
 						{children}

@@ -2,8 +2,8 @@ import { MegaphoneIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import Swal from 'sweetalert2'
-import { getQuery, typePageEcommerceCategory } from '../../../utils'
-import { useDeletePages0, useDeleteManySitesById, useDeletePages1, useDeletePages2, useDeletePages3, useDeleteProducts } from '../../hooks'
+import { getQuery, typePageEcommerceCategory, typePageFoodCategory } from '../../../utils'
+import { useDeletePages0, useDeleteManySitesById, useDeletePages1, useDeletePages2, useDeletePages3, useDeleteProducts, useDeleteFoods } from '../../hooks'
 
 interface HeadingDashboardOption {
   checked: boolean
@@ -20,9 +20,10 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
   const { mutate: deleteSites } = useDeleteManySitesById()
   const { mutate: deletePages0 } = useDeletePages0(query[2])
   const { mutate: deletePages1 } = useDeletePages1(query[4])
-  const { mutate: deletePages2 } = useDeletePages2(query[3]?.split('=')[1])
-  const { mutate: deletePages3 } = useDeletePages3(query[3]?.split('=')[1])
+  const { mutate: deletePages2 } = useDeletePages2(query[4])
+  const { mutate: deletePages3 } = useDeletePages3(query[4])
   const { mutate: deleteProducts } = useDeleteProducts(query[4])
+  const { mutate: deleteFoods } = useDeleteFoods(query[4])
   const deleteHandle = () => {
     // console.log('deleteHandle', select);
     Swal.fire({
@@ -42,6 +43,9 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
 
         if (query.length === 5) {
           if (query[3] === 'page0') { deletePages1({ ids: selected })} 
+          if (query[3] === 'page1' && typePageFoodCategory.map(data => data.value).includes(type!)) {
+            deleteFoods({ ids: selected, type: type! })
+          }
           if (query[3] === 'page1') {
             deletePages2({ ids: selected })
           }

@@ -1,12 +1,12 @@
-import React, { Fragment, useMemo, useState } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import { useRouter } from 'next/router'
 
-import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor, useAllFoods, findAllFoodsByParent, findAllFoods, findFood, useSite, usePages0ByParent, usePages1ByParent } from '../../../../../src/hooks'
+import { findPage0, findPages0, findPages1ByParent, usePage0, usePages1ByParent } from '../../../../../src/hooks'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { LayoutDashboard } from '../../../../../src/layouts'
-import { HeadingDashboard, Pages0, Pages1 } from '../../../../../src/components'
+import { HeadingDashboard, Pages1 } from '../../../../../src/components'
 
 function Page0() {
   const { asPath } = useRouter()

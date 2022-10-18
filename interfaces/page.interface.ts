@@ -1,5 +1,6 @@
 // import { Article } from "../article/article.interface";
 // import { Product } from "../product/product.interface";
+import { Food } from "./food.interface";
 import { Image, Seo } from "./site.interface";
 
 export interface Page {
@@ -8,7 +9,8 @@ export interface Page {
   slug: string;
   parent: string;
   // article: Article[];
-  page:Page[];
+  page: Page[];
+  food: Food[];
   site: string
   // product: Product[]
 }
